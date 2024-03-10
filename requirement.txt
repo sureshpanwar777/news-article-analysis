@@ -9,7 +9,6 @@ psycopg2
 Werkzeug
 textblob
 Jinja2
-Werkzeug
 oauthlib
 click
 gunicorn
