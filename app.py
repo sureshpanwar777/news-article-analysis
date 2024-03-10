@@ -1,22 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from newspaper import Article
 import nltk
+nltk.download('all')
 from nltk import sent_tokenize, word_tokenize, pos_tag
 from collections import Counter
 import json
 import psycopg2
+from werkzeug.urls import url_quote
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-#nltk.download('all')
-
 # Connect to PostgreSQL
 conn = psycopg2.connect(
-    host="localhost",
-    database="newsanalysis",
-    user="postgres",
-    password="12345678"
+    host="dpg-cnmthkmn7f5s73d8uh0g-a",
+    database="news_analysis",
+    user="suresh",
+    password="oLb1dOwhXPx19klUls6XZTpd9oO1zGAI"
 )
 cur = conn.cursor()
 
