@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Article Analysis - Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url('static/bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header,
+        footer {
+            background-color: #34515e;
+            width: 100%;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            left: 0;
+            text-align: center;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            width: 100vw;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .logo {
+            max-height: 50px; /* Adjust the height of the logo */
+            margin-left: 1%;
+        }
+
+        header {
+            top: 0;
+            width: 100%;
+        }
+
+        footer {
+            bottom: 0;
+            width: 100%;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 28px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 70px;
+            margin-bottom: 70px; /* Adjust margin-bottom to leave space for the footer */
+            color: #444;
+        }
+
+        .flashcard {
+            width: 80%;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 16px;
+            margin-bottom: 20px;
+            margin-right: auto; /* Add margin on the right side */
+            margin-left: auto; /* Add margin on the left side */
+        }
+
+        .analysis-section {
+            width: 80%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .analysis-flashcard {
+            width: 100%; /* Set the width to 100% to match main content flashcard */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #34515e;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #1E6B9E;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        a {
+            color: #1E6B9E;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-btn {
+            color: #fff;
+            background-color: #1E6B9E;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: #125478;
+        }
+
+        /* Additional styles for the footer */
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="static/logo.png" alt="NewsScrub Logo" class="logo">
+            <h1>Refined Report</h1>
+        </div>
+    </header>
+
+    <main>
+        {% if title %}
+        <div class="flashcard">
+            <h2>Title: {{ title }}</h2>
+            <p>Content: {{ content }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Analysis Section -->
+        <div class="analysis-section">
+            <div class="analysis-flashcard">
+                <h2>Analysis</h2>
+                <p>Number of Sentences: {{ num_sentences }}</p>
+                <p>Number of Words: {{ num_words }}</p>
+
+                <h3>POS Counts:</h3>
+                {% if pos_counts %}
+                <table>
+                    <tr>
+                        <th>POS Tag</th>
+                        <th>Count</th>
+                    </tr>
+                    {% for tag, count in pos_counts.items() %}
+                    <tr>
+                        <td>{{ tag }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <p>No POS counts available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; NewsScrub: Polished News at Your Fingertips."</p>
+    </footer>
+</body>
+
+</html>

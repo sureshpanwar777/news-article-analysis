@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsForge"</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgba(80, 125, 174, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: rgba(57, 62, 65);
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Style for Admin Login Button */
+        .admin-login-button {
+            background-color: rgba(57, 62, 65);
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none; /* Remove default link underline */
+        }
+
+        .admin-login-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form action="/result" method="post">
+        <img class="logo" src="static/logo.png" alt="NewsScrub Logo">
+        <h2>
+            "Spotless Headlines: Your Ultimate News Tidy-Up Solution"</h2>
+
+        <label for="url">Enter URL:</label>
+        <input type="text" id="newsurl" name="newsurl" required>
+        <button type="submit">Submit</button>
+
+        <!-- Admin Login Button as a button -->
+        <a class="admin-login-button" href="{{ url_for('login') }}">Admin Login</a>
+    </form>
+</body>
+</html>

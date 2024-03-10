@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History for Admin</title>
+    <style>
+            body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('static/jpeg');
+    }
+
+    header,
+    footer {
+        background-color: #34515e;
+        width: 100%;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        left: 0;
+        text-align: center;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        width: 100vw;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    header {
+        top: 0;
+        width: 100%;
+    }
+
+    footer {
+        bottom: 0;
+        width: 100%;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    h1 {
+        color: #000;
+        margin-bottom: 20px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 70px;
+        margin-bottom: 70px; /* Add margin to avoid overlapping with the footer */
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 80%;
+        margin-top: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 12px;
+    }
+
+    th {
+        background-color: #1E6B9E;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    a {
+        color: #1E6B9E;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .logout-btn {
+        color: #fff;
+        background-color: #1E6B9E;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 20px; /* Move the logout button to the right */
+    }
+
+    .logout-btn:hover {
+        background-color: #125478;
+    }
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1 style="margin: 0 auto;">Admin Dashboard</h1>
+        <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+    </header>
+
+    <main>
+        {% if past_analyses %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>URL</th>
+                    <th>Title</th>
+                    <th>Number of Sentences</th>
+                    <th>Number of Words</th>
+                    <th>POS Counts</th>
+                </tr>
+                {% for analysis in past_analyses %}
+                    <tr>
+                        <td>{{ analysis[0] }}</td>
+                        <td>{{ analysis[1] }}</td>
+                        <td>{{ analysis[2] }}</td>
+                        <td>{{ analysis[4] }}</td>
+                        <td>{{ analysis[5] }}</td>
+                        <td>{{ analysis[6] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No past analyses available.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NewsNest. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
