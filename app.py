@@ -6,7 +6,7 @@ from nltk import sent_tokenize, word_tokenize, pos_tag
 from collections import Counter
 import json
 import psycopg2
-from werkzeug.urls import url_quote
+#from werkzeug.urls import url_quote
 
 
 app = Flask(__name__)
