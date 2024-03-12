@@ -5,12 +5,15 @@ from nltk import sent_tokenize, word_tokenize, pos_tag
 from collections import Counter
 import json
 import psycopg2
+from authlib.integrations.flask_client import OAuth
+
 
 # Download NLTK data
 nltk.download('all')
 
 # Initialize Flask app
 app = Flask(__name__)
+oauth = OAuth(app)
 app.secret_key = 'your_secret_key'
 
 # Connect to PostgreSQL
@@ -21,6 +24,67 @@ conn = psycopg2.connect(
     password="oLb1dOwhXPx19klUls6XZTpd9oO1zGAI"
 )
 cur = conn.cursor()
+
+app.config['SECRET_KEY'] = "suresh_secret_key"
+app.config['GITHUB_CLIENT_ID'] = "d40134cef5babd6c5ce4"
+app.config['GITHUB_CLIENT_SECRET'] = "5b717ab28ec76ad97de267e28ccd1b817df0e280"
+
+github = oauth.register(
+    name='github',
+    client_id=app.config["GITHUB_CLIENT_ID"],
+    client_secret=app.config["GITHUB_CLIENT_SECRET"],
+    access_token_url='https://github.com/login/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    authorize_params=None,
+    api_base_url='https://api.github.com/',
+    client_kwargs={'scope': 'user:email'},
+)
+github_admin_usernames = ["sureshpanwar777", "atmabodha"]
+
+@app.route('/admin_route')
+def admin_route():
+    is_admin = False
+    github_token = session.get('github_token')
+    if github_token:
+        github = oauth.create_client('github')
+        resp = github.get('user').json()
+        username = resp.get('login')
+        if username in github_admin_usernames:
+            is_admin = True
+    return render_template('login.html', logged_in=github_token is not None, is_admin=is_admin)
+    
+@app.route('/login/github')
+def github_login():
+    github = oauth.create_client('github')
+    redirect_uri = url_for('github_authorize', _external=True)
+    return github.authorize_redirect(redirect_uri)
+
+@app.route('/login/github/authorize')
+def github_authorize():
+    github = oauth.create_client('github')
+    token = github.authorize_access_token()
+    session['github_token'] = token
+    resp = github.get('user').json()
+    print(f"\n{resp}\n")
+
+    if 'login' in resp:
+        username = resp['login']
+        if username in github_admin_usernames:
+            analysis_data = fetch_analysis_data()
+            return render_template('admin_dashboard.html', analysis_data=analysis_data)
+        else:
+            return f'you are not authorized to access this page'
+    else:
+        return f'Unable to fetch github username'
+
+@app.route('/logout/github')
+def github_logout():
+    session.pop('github_token', None)
+    return redirect(url_for('home'))
+
+
+
 
 def create_table():
     """Create a table if it doesn't exist"""
