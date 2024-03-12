@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login-page</title>
+    <!-- Include Octicons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/12.1.0/octicons.min.css">
+    <!-- CSS styles -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -47,7 +50,7 @@
             width: calc(100% - 20px);
             padding: 12px;
             font-size: 16px;
-            margin-bottom: 10px; /* Decreased margin */
+            margin-bottom: 10px;
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 6px;
@@ -64,7 +67,7 @@
             border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-bottom: 10px; /* Decreased margin */
+            margin-bottom: 10px;
         }
 
         button:hover {
@@ -75,13 +78,13 @@
             font-size: 14px;
             color: #777;
             text-align: left;
-            margin-bottom: 10px; /* Decreased margin */
+            margin-bottom: 10px;
         }
 
         .flash {
             font-size: 2.7rem;
             font-weight: 900;
-            color: #fbf6f6; /* Set text color to black and transparent */
+            color: #fbf6f6;
             padding: 1rem;
         }
 
@@ -90,9 +93,43 @@
             font-size: 1.25rem;
             font-weight: 300;
         }
+
+        .github-login-container {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Style the GitHub button */
+        .github-login-btn {
+            background-color: #24292e;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .github-login-btn:hover {
+            background-color: #1f6feb;
+        }
+
+        /* Style the GitHub icon */
+        .github-icon {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
+    <!-- Flash message -->
     <h1 class="flash">
         Login to view the Analysis history
         <p class="p">
@@ -100,6 +137,7 @@
         </p>
     </h1>
     
+    <!-- Login form -->
     <form action="/login" method="post">
         <h1>Admin Login</h1>
 
@@ -111,18 +149,22 @@
         <input type="password" id="password" name="password" required>
         <p class="hint">(Hint: admin)</p>
 
-        <button type="submit">Login</button>
-    </form>
-    <h1>Github Login</h1>    
-    {% if logged_in %}
-        <p>You are logged in with GitHub.</p>
-        {% if is_admin %}
-            <p>You are an admin user.</p>
-        {% else %}
-            <p>You are not an admin user.</p>
-        {% endif %}
-    {% else %}
-        <a href="{{ url_for('github_login') }}">Login with GitHub</a>
-    {% endif %}
-</body>
-</html>
+        <button type="submit">Login</button><br>
+
+        <!-- GitHub login button -->
+        <div class="github-login-container">
+            <a href="{{ url_for('github_login') }}" class="github-login-btn">
+                <svg class="github-icon" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 .25a8 8 0 00-2.534 15.596c.4.074.548-.174.548-.385 0-.19-.007-.692-.011-1.357-2.235.485-2.707-1.076-2.707-1.076-.365-.927-.891-1.171-.891-1.171-.727-.496.055-.486.055-.486.805.057 1.227.826 1.227.826.714 1.225 1.873.872 2.33.666.072-.516.278-.872.506-1.072-1.775-.2-3.642-.887-3.642-3.945 0-.872.313-1.587.826-2.146-.083-.2-.36-1.018.079-2.121 0 0 .672-.215 2.2.824.638-.178 1.318-.267 1.993-.27.674.003 1.355.092 1.993.27 1.524-1.04 2.196-.824 2.196-.824.44 1.103.162 1.921.08 2.121.514.559.826 1.274.826 2.146 0 2.964-1.872 3.742-3.656 3.936.288.248.54.737.54 1.485 0 1.07-.01 1.928-.01 2.191 0 .212.144.463.55.384A8 8 0 008 0z"></path>
+                </svg>
+                    Login with GitHub
+
+                </a>
+            </div>
+        </form>
+    </body>
+    </html>
+
+
+
+
