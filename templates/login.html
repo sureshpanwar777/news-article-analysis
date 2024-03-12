@@ -113,5 +113,16 @@
 
         <button type="submit">Login</button>
     </form>
+        
+    {% if logged_in %}
+        <p>You are logged in with GitHub.</p>
+        {% if is_admin %}
+            <p>You are an admin user.</p>
+        {% else %}
+            <p>You are not an admin user.</p>
+        {% endif %}
+    {% else %}
+        <a href="{{ url_for('github_login') }}">Login with GitHub</a>
+    {% endif %}
 </body>
 </html>
