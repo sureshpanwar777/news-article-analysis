@@ -3,95 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsForge"</title>
+    <title>NewsForge</title>
     <style>
+        /* Styling for the entire page */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            background-image: url('static/back.jpg'); /* Replace 'background.jpg' with the path to your background image */
+            background-size: cover;
+            background-position: center;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            color: #fff; /* Set text color to white for better contrast */
+            position: relative; /* Needed for absolute positioning */
         }
 
-        form {
-            background-color: rgba(80, 125, 174, 0.9);
-            padding: 20px;
+        /* Styling for the main content container */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black semi-transparent background */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
             text-align: center;
+            margin-bottom: 20px; /* Add margin at the bottom to separate from the flashcard */
         }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: rgba(57, 62, 65);
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        h2 {
-            color: #000000;
-            font-size: 18px;
-            font-style: italic;
-        }
-
+        /* Styling for the logo */
         .logo {
             max-width: 100px;
             height: auto;
             margin-bottom: 20px;
         }
 
-        /* Style for Admin Login Button */
-        .admin-login-button {
-            background-color: rgba(57, 62, 65);
+        /* Styling for the main headline */
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff; /* Set text color to pure white */
+        }
+
+        /* Styling for labels */
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        /* Styling for text input */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for better readability */
+            color: #333; /* Set text color to black for better contrast */
+        }
+
+        /* Styling for submit button */
+        button.submit-button {
+            background-color: #007bff; /* Blue color */
             color: #fff;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            text-decoration: none; /* Remove default link underline */
+            transition: background-color 0.3s ease;
         }
 
+        /* Hover effect for submit button */
+        button.submit-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Styling for admin login button */
+        .admin-login-button {
+            background-color: #dc3545; /* Red color */
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            position: fixed; /* Fixed position */
+            top: 20px; /* Adjust position from top */
+            right: 20px; /* Adjust position from right */
+            z-index: 9999; /* Ensure it's above other elements */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for admin login button */
         .admin-login-button:hover {
-            background-color: #45a049;
+            background-color: #c82333; /* Darker red on hover */
+        }
+
+        /* Styling for flashcard text */
+        .flashcard {
+            font-size: 2.7rem;
+            font-weight: 900;
+            color: #faf3f3; /* Set text color to black and transparent */
         }
     </style>
 </head>
 <body>
-    <form action="/result" method="post">
+    <!-- Main headline -->
+    <h1 class="flashcard">
+        Spotless Headlines: Your Ultimate News Tidy-Up Solution
+    </h1>
+    <br>
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Logo -->
         <img class="logo" src="static/logo.png" alt="NewsScrub Logo">
-        <h2>
-            "Spotless Headlines: Your Ultimate News Tidy-Up Solution"</h2>
-
-        <label for="url">Enter URL:</label>
-        <input type="text" id="newsurl" name="newsurl" required>
-        <button type="submit">Submit</button>
-
-        <!-- Admin Login Button as a button -->
-        <a class="admin-login-button" href="{{ url_for('login') }}">Admin Login</a>
-    </form>
+        <!-- Secondary headline -->
+        <h1> Your Source for In-depth News Analysis </h1>
+        <!-- Form for entering URL -->
+        <form action="/result" method="post">
+            <!-- Label for URL input -->
+            <label for="url">Enter URL:</label>
+            <!-- Input field for URL -->
+            <input type="text" id="newsurl" name="newsurl" required>
+            <!-- Submit button -->
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+    <!-- Admin login button -->
+    <a class="admin-login-button" href="{{ url_for('login') }}">Admin Login</a>
 </body>
 </html>
