@@ -6,122 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Article Analysis - Result</title>
     <style>
+        /* General styling for the body */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: url('static/bg.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            color: #333;
+            background-color: #f7f7f7; /* Background color */
+            color: #333; /* Text color */
         }
 
-        header,
-        footer {
-            background-color: #34515e;
-            width: 100%;
-            padding: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            left: 0;
-            text-align: center;
-            z-index: 2;
-            display: flex;
-            justify-content: space-between;
-            width: 100vw;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        .logo {
-            max-height: 50px; /* Adjust the height of the logo */
-            margin-left: 1%;
-        }
-
+        /* Styling for the header */
         header {
-            top: 0;
-            width: 100%;
+            background-color: #1e88e5; /* Header background color */
+            color: #fff; /* Header text color */
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        footer {
-            bottom: 0;
-            width: 100%;
+        /* Styling for the logo */
+        .logo {
+            max-width: 100px;
+            margin-bottom: 10px;
         }
 
+        /* Styling for main title */
         h1 {
-            color: #fff;
             margin: 0;
-            font-size: 28px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 32px;
+            letter-spacing: 2px;
+            color: #000; /* Changed title color to black */
+            font-weight: bold; /* Added font weight as bold */
+            text-align: center; /* Center align */
         }
 
+        /* Styling for main content */
         main {
+            padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 70px;
-            margin-bottom: 70px; /* Adjust margin-bottom to leave space for the footer */
-            color: #444;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .flashcard {
-            width: 80%;
-            margin-top: 20px;
+        /* Styling for flash message container */
+        .flash {
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            overflow: hidden;
-            padding: 16px;
-            margin-bottom: 20px;
-            margin-right: auto; /* Add margin on the right side */
-            margin-left: auto; /* Add margin on the left side */
+            padding: 25px;
+            margin: 20px;
+            width: 1000px;
+            transition: transform 0.3s ease;
         }
 
-        .analysis-section {
-            width: 80%;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .flash:hover {
+            transform: translateY(-10px);
         }
 
-        .analysis-flashcard {
-            width: 100%; /* Set the width to 100% to match main content flashcard */
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
-
+        /* Styling for secondary headings */
         h2 {
-            color: #34515e;
-            font-size: 22px;
-            margin-bottom: 16px;
+            color: #1e88e5;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
+        /* Styling for paragraphs */
         p {
-            margin: 8px 0;
+            margin: 10px 0;
+            font-size: 16px;
         }
 
+        /* Styling for tables */
         table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -129,12 +92,12 @@
         th,
         td {
             border: 1px solid #ddd;
-            text-align: left;
             padding: 12px;
+            text-align: left;
         }
 
         th {
-            background-color: #1E6B9E;
+            background-color: #1e88e5;
             color: #fff;
         }
 
@@ -146,85 +109,82 @@
             background-color: #e0e0e0;
         }
 
+        /* Styling for links */
         a {
-            color: #1E6B9E;
+            color: #1e88e5;
             text-decoration: none;
-            font-size: 16px;
         }
 
         a:hover {
             text-decoration: underline;
         }
 
-        .logout-btn {
+        /* Styling for the footer */
+        footer {
+            background-color: #1e88e5;
             color: #fff;
-            background-color: #1E6B9E;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Styling for the logout button */
+        .logout-btn {
+            background-color: #ff7043;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s;
         }
 
         .logout-btn:hover {
-            background-color: #125478;
-        }
-
-        /* Additional styles for the footer */
-        footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
+            background-color: #f4511e;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="header-content">
-            <img src="static/logo.png" alt="NewsScrub Logo" class="logo">
-            <h1>Refined Report</h1>
-        </div>
-    </header>
+    <!-- Main title -->
+    <h1>Refined Report</h1>
 
     <main>
+        <!-- Flash message for title and content -->
         {% if title %}
-        <div class="flashcard">
-            <h2>Title: {{ title }}</h2>
+        <div class="flash">
+            <h2><span style="color: black; font-weight: bold;">Title:</span> {{ title }}</h2>
             <p>Content: {{ content }}</p>
         </div>
         {% endif %}
 
         <!-- Analysis Section -->
-        <div class="analysis-section">
-            <div class="analysis-flashcard">
-                <h2>Analysis</h2>
-                <p>Number of Sentences: {{ num_sentences }}</p>
-                <p>Number of Words: {{ num_words }}</p>
-
-                <h3>POS Counts:</h3>
-                {% if pos_counts %}
-                <table>
-                    <tr>
-                        <th>POS Tag</th>
-                        <th>Count</th>
-                    </tr>
+        <div class="flashcard">
+            <h2>Analysis</h2>
+            <p>Number of Sentences: {{ num_sentences }}</p>
+            <p>Number of Words: {{ num_words }}</p>
+        
+            <h3>POS Counts:</h3>
+            <!-- Loop through POS counts -->
+            {% if pos_counts %}
+                <ul>
                     {% for tag, count in pos_counts.items() %}
-                    <tr>
-                        <td>{{ tag }}</td>
-                        <td>{{ count }}</td>
-                    </tr>
+                        <li>{{ tag }}: {{ count }}</li>
                     {% endfor %}
-                </table>
-                {% else %}
+                </ul>
+            {% else %}
                 <p>No POS counts available.</p>
-                {% endif %}
-            </div>
+            {% endif %}
         </div>
     </main>
 
-    <!-- Footer Section -->
+    <!-- Footer with logout button -->
     <footer>
-        <p>&copy; NewsScrub: Polished News at Your Fingertips."</p>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </footer>
 </body>
 
