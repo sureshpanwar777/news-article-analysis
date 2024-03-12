@@ -201,6 +201,6 @@ def result():
                                     num_sentences=num_sentences, num_words=num_words, pos_counts=pos_counts)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0', port=8080)
     cur.close()
     conn.close()
