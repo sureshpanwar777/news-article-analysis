@@ -71,8 +71,9 @@ def github_authorize():
     if 'login' in resp:
         username = resp['login']
         if username in github_admin_usernames:
-            analysis_data = fetch_analysis_data()
-            return render_template('admin_dashboard.html', analysis_data=analysis_data)
+             cur.execute("SELECT * FROM newsdata")
+             past_analyses = cur.fetchall()
+             return render_template('admin_dashboard.html', past_analyses=past_analyses)
         else:
             return f'you are not authorized to access this page'
     else:
